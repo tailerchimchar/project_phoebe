@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+        <script type="text/javascript" src="cordova.js"></script>
+        <title> Buddy</title>
+        <style type = "text/css">
+
+            body{
+                display:block;
+            }
+            .butt{
+                border-radius:50%;
+                width: 50px;
+                height: 50px;
+                Background-color:#dddddd;
+                position:relative;
+                float:center;
+                margin:8px;
+                margin-left:50px;
+                border: .5px solid white;
+                box-sizing: border-box;
+                user-select: none;
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -o-user-select: none;    
+                text-align: center;
+
+
+            }
+
+            .butt:hover {
+                background-color: #cccccc;
+            }
+
+            .butt:active {
+                border: 1px solid grey;
+            }    
+
+            #bottomButts{
+                width:100%;
+                height:80px;
+                //border: 2px solid blue;
+                position:fixed;
+                bottom:0px;
+                //top:60%;
+                background-size:cover;
+                text-align: center;
+                float:center;
+                //top:35vh;		
+
+
+
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                background-image:url(sadReax.gif);
+                background-repeat: no-repeat;
+                width:100%;
+                background-size:cover;
+                height:100vh;
+                background-position: center;
+
+
+
+            }
+            #tim{
+                position:relative;
+                top:-30px;
+                left:250px;
+                width:80px;
+                height:50px;
+                text-align:center;
+                vertical-align: middle;
+                line-height: 50px;
+            }
+
+
+
+            #happiness-bar {
+
+
+                width: 80%;
+                height: 60px;
+                border: 3px solid red;
+                margin: 0 auto;
+            }   
+
+            #bar-progress {
+
+                height: inherit;
+                width: 0%;
+                Background-color: #5CDB34;
+
+            }
+            #jumpropeButt{
+                background-image:url(heart.png);
+                background-size:contain;
+            }
+            #storyButt{
+                background-image:url(book.png);
+                background-size:contain;    
+            }
+            #feelings{
+                background-image:url(happy.png);
+                background-size:contain;
+
+            }
+            #geomap{
+                background-image:url(map.jpg);
+                background-size: contain;
+            }
+
+            .arrow{
+                border: solid black;
+                border-width: 0 3px 3px 0;
+                display: inline-block;
+                padding: 3px;
+            }
+            #rightArrow{
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+            }
+            #leftArrow{
+                transform: rotate(135deg);
+                -webkit-transform: rotate(135deg);
+            }
+
+            #topSec{
+                position:relative;
+                // top:200px;
+
+                width:175px;
+                height:70px;
+                left:35%;
+                background-color:white;
+
+            }    
+
+
+            .speech-bubble {
+                position: relative;
+                background: #81F781;
+                border-radius: .4em;
+                width:150px;
+                text-align: center;
+                height:auto;
+                left:60%;
+                top:-40%;
+
+            }
+            .speech-bubble:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border: 23px solid transparent;
+                border-top-color: #81F781;
+                border-bottom: 0;
+                border-left: 0;
+                margin-left: -11.5px;
+                margin-bottom: -23px;
+            }
+            #greetings{
+                vertical-align: middle;
+                line-height:inherit;
+                height:inherit;
+            }
+            h1{
+                width:100px;
+                height:50px;
+                background-color:red;
+                position:relative;
+                top:20px;
+                left:20%;
+
+                visibility: hidden;
+            }
+            #gui{
+                display:block;    
+            }
+            #storytime {
+                position: fixed;
+                background: #00aabb;
+                border-radius: .4em;
+                width: 200px;
+                text-align: center;
+                min-height:125px;
+                left:60%;
+                top:20%;
+                z-index: 1;
+
+
+
+            }   
+            #storytime:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border: 23px solid transparent;
+                border-top-color: #00aabb;
+                border-bottom: 0;
+                border-left: 0;
+                margin-left: -11.5px;
+                margin-bottom: -23px;
+                z-index: 1;
+
+            }
+            #storytext{
+
+
+                vertical-align: middle;
+                line-height:inherit;
+                z-index: 2;
+                position:relative;
+
+            }
+
+            #plot{
+                display: none;    
+            }
+
+            .box{
+                position:relative;
+                float:left;
+
+                margin-left:32px;
+                border: 3px solid gray;
+                width:35%;
+                margin-top:20px;
+                height:50px;
+                background-color:white;
+                //top:50%;
+                top:400px;
+
+            }
+            .text{
+                display:inline-block;
+            }
+            #emotions{
+                display:none;    
+            }
+            #map{
+                width:100%;
+                height: 100vh; 
+                display:none;
+            }
+            #home-button {
+
+                position: absolute;
+                height: 16%;
+                width: 16%;
+                top: 92%;
+                left: 0;
+                background-image:url("home-butt.png");
+                background-size:contain;
+                background-repeat:no-repeat;
+            }
+            #emotionStoryTime {
+                position: relative;
+                background: #F8E0F1;
+                border-radius: .4em;
+                width: 200px;
+                text-align: center;
+                min-height:125px;
+                left:60%;
+                top:auto;
+                z-index: 1;
+
+
+
+            }   
+            #emotionStoryTime:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border: 23px solid transparent;
+                border-top-color: #F8E0F1;
+                border-bottom: 0;
+                border-left: 0;
+                margin-left: -11.5px;
+                margin-bottom: -23px;
+                z-index: 1;
+
+            }
+            #emotionStory{
+
+
+                vertical-align: middle;
+                line-height:inherit;
+                z-index: 2;
+                position:relative;
+                top:-30px;
+            }
+            #click_to_continue{
+
+                position:relative;
+
+            }
+            #pictures{
+                display:none;
+                z-index: 5;
+                width:100%;
+                height:100vh;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            #picButt{
+                border-radius:0%;
+                z-index:7;
+                background-color: palevioletred;
+                width:15%;
+                border: 3px solid black;
+            }
+            #physical{
+                position:relative;
+                width:2%;
+                left:66%;
+                top:4vh;
+                display:none;
+            }
+            #jumpRope{
+                background-image:url(jumprope.jpg);
+                background-size:contain;
+            }
+            #walk{
+                background-image: url(turtle.png);
+                background-size:contain;
+                background-repeat: no-repeat;
+                top:9%;
+            }
+            #run{
+                background-image: url(rabbit.jpg);
+                background-size:contain;
+            }
+            
+        </style>
+
+    </head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <body onload="onLoad()">
+        
+        
+        <div id = "pictures"><button id = "picButt" class = "butt"> Click me to continue!</button></div>
+        <div id = "gui">
+            <div id="happiness-bar">
+
+                <div id="bar-progress">
+
+                </div>
+
+            </div>
+
+            <div class  = "speech-bubble">
+                <p id = "greetings">Hello there! I am PHOEBE, and I am sad. Click anywhere to help change this.</p>
+
+
+            </div>
+            <h1><time>00:00</time></h1>
+            <!--<img src = "sadReax.gif" width = "200px" height ="100%">-->
+
+           <div id = "physical">
+                    <button id = "jumpRope" class = "butt"></button>
+                    <button id = "walk" class = "butt"></button>
+                    <button id = "run" class = "butt"></button>
+                </div>
+            <div id = "bottomButts">
+                
+                <button id = "jumpropeButt" class = "butt">
+
+                </button>
+                <button id = "feelings" class = "butt">
+
+                </button>
+                <button id = "geomap" class = "butt">
+
+                </button>
+                <button id = "storyButt" class = "butt">
+
+                </button>
+
+
+            </div>
+
+
+
+
+        </div>
+        <div id = "plot">
+            <div id = "choice_one" class = "storyBox box">
+                <p class = "text" > Absolutely!</p>
+            </div>
+            <div id = "choice_two" class = "storyBox box">
+                <p class = "text">No way, Jose!</p>
+            </div>
+            <div id = "choice_three" class = "storyBox box">
+                <p class = "text" > </p>
+            </div>
+
+            <!--<div id="happiness-bar">
+
+<div id="bar-progress">
+
+</div>
+
+</div>-->
+            <div id = "storytime">
+
+                <p id = "storytext">Welcome to my story, where we will be the best of friends! Are you ready?</p>
+                <div id = "click_to_continue">
+                    <p class = "text" > Click on a button to continue! </p>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div id = "emotions">
+            <div id = "choice_1" class = "box">
+                <p class = "text" > A little... yes. </p>
+            </div>
+            <div id = "choice_2" class = "box">
+                <p class = "text"> Not in particular.</p>
+            </div>
+            <div id = "emotionStoryTime"> <p id = "emotionStory">Hello there! I'm your buddy for all your emotional needs! Are you feeling distraught?</p>
+            </div>
+        </div>
+
+
+        <div id="map"></div>
+
+
+
+        <div id="home-button">
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+
+
+
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            var yourlat=0;
+            var yourlong=0;
+
+            function success(pos) {
+                var crd = pos.coords;
+
+                console.log('Your current position is:');
+                console.log(`Latitude : ${crd.latitude}`);
+                console.log(`Longitude: ${crd.longitude}`);
+                console.log(`More or less ${crd.accuracy} meters.`);
+                yourlat = crd.latitude;
+                yourlong = crd.longitude;
+
+            }
+
+            function error(err) {
+                console.warn(`ERROR(${err.code}): ${err.message}`);
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+            $("#geomap").click(function(){
+                $("*").css("display","none");
+                $("body").css("background-image", "none");
+                $("#map").css("display","block");
+                $("body, html, #home-button").css("display", "block");
+                initMap();
+            });
+
+            function initMap(){
+                var location = {lat: yourlat, lng: yourlong};
+                var map = new google.maps.Map(document.getElementById("map"),{
+                    zoom:20,
+                    center:location
+                });
+                var marker = new google.maps.Marker({
+                    position:location,
+                    map:map
+                });
+                console.log(marker);
+            }
+
+            function isHappy(){
+                if(progress<4){
+                    $("body").css("background-image","url('sadReax')");
+                }
+                else if (progress < 7 && progress > 3){
+                    $("body").css("background-image","url('idle.gif)")
+                }
+                else{
+                    $("body").css("background-image","url('happy.gif')");
+                }
+            }
+
+
+
+            var story = 0;
+            $("body").click(function(){
+                if(story ==0){
+                    $("#greetings").html("This is not a drill"); 
+                    story++;
+
+                }
+                if(story == 1){
+                    $("#greetings").html("There are many things you can do for me!");
+                    story++;
+                }
+                else if(story == 2){
+                    $("#greetings").html("See that bottom button on the way left?");;
+                    story++;
+                }
+                else if(story == 3){
+                    $("#greetings").html("I like to exercise! When you press that button, you can make me jump rope, walk a bit, or run!");
+                    story++;
+                }
+                else if(story == 4){
+                    $("#greetings").html("If I do any of these physical activities for a while, I become more happy!");;
+                    story++;
+                }
+                else if(story == 5){
+                    $("#greetings").html("Physical exercises is not only good for the body, but it is also mentally healthy! You should follow me along in these exercises. ");
+                    story++;
+                }
+            });
+            var h1 = document.getElementsByTagName('h1')[0], 
+                seconds = 0, minutes = 0, 
+                t;
+            function add() {
+                seconds++;
+
+                if(seconds%3 == 0){
+                    progress++;
+                    updateProgressBar();
+
+                }
+
+                if (seconds >= 60) {
+                    seconds = 0;
+                    minutes++;
+
+                }
+                h1.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+                timer();
+            }
+            function timer(){
+                t = setTimeout(add,1000);
+            }
+
+
+            $(".butt").click(function(){
+                h1.textContent = "00:00"
+                seconds=0; minutes=0;
+
+
+            });
+
+
+            time = 500;
+            var progress = 0;
+            function invoke() {
+
+                time += 500; //some new value
+                window.setTimeout(invoke, time);
+            }
+
+            var oddeven=0;
+            $("#jumpRope").click(function(){
+               $('body').css('background-image', "url('Jrope.gif')");
+
+                if(oddeven==0){
+
+                    timer();
+                    window.setTimeout(invoke, time);
+                    oddeven++;
+                    $("h1").css("visibility", "visible");
+                }
+                
+                
+            });
+            $("#walk").click(function(){
+               $('body').css('background-image', "url('walk.gif')");
+
+                if(oddeven==0){
+
+                    timer();
+                    window.setTimeout(invoke, time);
+                }
+               
+            });
+            $("#run").click(function(){
+               $('body').css('background-image', "url('run.gif')");
+
+                if(oddeven==0){
+
+                    timer();
+                    window.setTimeout(invoke, time);
+                }
+                
+            });
+            $("#jumpropeButt").click(function(){
+                $("#physical").css("display","block");
+            });
+            var isStory = false;
+            var plot = 0;
+            //STORY TIME
+            $("#storyButt").click(function(){
+                $("#gui").css("display","none"); 
+                $("#plot").css("display","block");
+                $("body").css("background-image","url(idle.gif)");
+                isStory = true;
+                storyTimeLine();
+
+
+            });
+            var counter = 0;
+
+
+
+            function storyTimeLine(){
+                $(".storyBox").click(function(){
+                    counter++;
+
+
+                    updateStoryText(counter);
+
+                    if(counter==13){
+                        $("#storytext").html("Good job! You have finished all of my questions. I will now direct you back to the home page. Press a button to continue!");
+                    }
+                    if(counter>13){
+                        location.reload(true);
+                    }
+
+
+
+
+                });
+
+                $("#choice_one").click(function(){
+                    if(counter==2){
+                        $("#storytext").html("That is a great idea! Choice two was also a great option because some mother's don't need you to spend money");
+                    }
+                    if(counter==4){
+                        $("#storytext").html("That is a horrible idea, you can't yell at your mom!");
+                    }
+                    if(counter==6){
+                        $("#storytext").html("Sharing is caring, so you shouldn't keep the candy to yourself");
+                    }
+                    if(counter==8){
+                        $("#storytext").html("Even though you are standing up for you friend, breaking someone's toys is also bullying them.");
+                    }
+                    if(counter==10){
+                        $("#storytext").html("You can't just bully your friend just because you guys are fighting.");
+                    }
+                    if(counter==12){
+                        $("#storytext").html("Even though it's sad, crying won't help you get better. Try to work harder next time and feel better!");
+                    }
+
+
+                });
+                $("#choice_two").click(function(){
+                    if(counter==2){
+                        $("#storytext").html("That is a great idea! Choice one was also a great option because some mother's will have a fond memory of your gift for her.");
+                    }
+                    if(counter==4){
+                        $("#storytext").html("That's great! Working hard for what you want is really rewarding.");
+                    }
+                    if(counter==6){
+                        $("#storytext").html("Sharing is caring! It's great that you're thinking of your sibling and sharing what you like with them.");
+                    }
+                    if(counter==8){
+                        $("#storytext").html("You should try standing up for your friend!");
+                    }
+                    if(counter==10){
+                        $("#storytext").html("Saying sorry is the best step to take! Compromising and saying sorry makes you a better person.");
+                    }
+                    if(counter==12){
+                        $("#storytext").html("Learning from your mistakes will help you get better! You'll be set for success if you keep this mindset.");
+                    }
+
+                });
+                $("#choice_three").click(function(){
+                    if(counter==2){
+                        $("#storytext").html("That is a bad idea");
+                    }
+                    if(counter==4){
+                        $("#storytext").html("Stealing is bad, you should try to work for what you want.");
+                    }
+                    if(counter==6){
+                        $("#storytext").html("You can't just throw it away! That was some good candy that you and your sibling could've shared.");
+                    }
+                    if(counter==8){
+                        $("#storytext").html("Telling an adult/teacher is a good idea! They'll know what to do in this situation.");
+                    }
+                    if(counter==10){
+                        $("#storytext").html("Spreading rumors about other people is not good! You wouldn't want them to spread rumors about you would you?");
+                    }
+                    if(counter==12){
+                        $("#storytext").html("No matter how sad you are about getting a bad grade, you have to work harder! Cheating is not an option.");
+                    }
+
+
+
+                });
+            }
+
+            function updateStoryText(counter){
+
+                if(counter==1){
+
+                    $("#storytext").html("Mother's day is coming up and you want to thank her. What do you do?");
+                    $("#choice_one").html("Buy her a gift");
+                    $("#choice_two").html("Hug her on mother's day and say thank you");
+                    $("#choice_three").html("ignore her on mother's day");
+
+                }
+                if(counter==3){
+                    $("#storytext").html("Your mom didn't buy you the toy you wanted from the store. Do you...");
+                    $("#choice_one").html("Yell at her");
+                    $("#choice_two").html("Do chores to earn money to buy the toy yourself");
+                    $("#choice_three").html("Steal the toy");
+                }
+                if(counter==5){
+                    $("#storytext").html("There is only one piece of candy left and both you and your sibling want it. Do you...");
+                    $("#choice_one").html("Eat it");
+                    $("#choice_two").html("Share and give it to your sibling.");
+                    $("#choice_three").html("Throw the candy away so neither of you can have it.");
+                }
+                if(counter==7){
+                    $("#storytext").html("You see someone bullying a classmate. Do you");
+                    $("#choice_one").html("Break his toys");
+                    $("#choice_two").html("Watch/Ignore everyone and walk away");
+                    $("#choice_three").html("Tell a teacher");
+                }
+                if(counter==9){
+                    $("#storytext").html("You and your best friend had a fight. Do you..");
+                    $("#choice_one").html("Break his toys");
+                    $("#choice_two").html("Say sorry and make up");
+                    $("#choice_three").html("Spread rumors about your friend");
+                }
+                if(counter==11){
+                    $("#storytext").html("You got a bad grade on your test. Do you...");
+                    $("#choice_one").html("Cry and pout about it");
+                    $("#choice_two").html("Learn from your mistakes and study harder/ask for help");
+                    $("#choice_three").html("Cheat on your next test");
+                }
+
+
+            }
+            if(counter > 1 && counter%2==1){
+                $("#storytext").html("Click anywhere to continue");
+            }
+
+
+
+            $("#food").click(function(){
+                $('body').css('background-image', "url('happy.gif')");
+            });
+
+            $("#sleep").click(function(){
+                $('body').css('background-image', "url('angry.gif')");
+            });
+
+            $("#drink").click(function(){
+                $('body').css('background-image', "url('sadReax.gif')");
+            });
+
+
+
+            var clear; function stopWatch( ) { clear = setTimeout( "stopWatch( )", 1000 ); }
+
+            function updateProgressBar() {
+                if(progress>20){
+                    progress=20;
+                }
+                $("#bar-progress").width("" + 5*progress + "%");
+
+            }
+
+            $("#feelings").click(function(){
+                $("#gui").css("display","none");
+                $("#emotions").css("display","block");   
+
+                feelingsTime();
+            });
+
+            var fellings = 0;
+            function feelingsTime() {
+               
+                $("#picButt").click(function(){
+                   if(fellings==-2){    
+                        $("#pictures").css("background-image","url('dog2.jpg')");
+                        fellings=-3;
+                    } 
+                    else if(fellings==-3){  
+                        $("#pictures").css("background-image","url('dog3.jpg')");
+                        fellings=-4;
+                    }
+                    else if(fellings==-4){   
+                        $("#pictures").css("background-image","url('dog4.jpg')");
+                        fellings=-5;
+                    }
+                    else if(fellings==-5){
+                        location.reload(true);
+                    }
+                });
+                $("#choice_1").click(function(){
+                    
+                    if(fellings==0){
+
+                        $("#emotionStory").html("I'm sorry to hear that! Which of these options would you like me to do for you?");
+                        fellings=1;
+                        $("#choice_1").html("Give me advice!");
+                        $("#choice_2").html("Show me pictures of dogs!");
+
+                    }
+                    else if(fellings==1){
+                        $("#emotionStory").html("Okay! When I am sad, I write my feelings down in a notebook to help me think about my feelings on paper. Would you like to share some of your feelings with me?");
+                        fellings=3;
+                        $("#choice_1").html("Sure!");
+                        $("#choice_2").html("No thanks, I'll go back to the home page.");
+                    }
+                    else if(fellings==3){
+                        $("#emotionStory").html("Okay! I am listening. Press any button to go back to the home page.");
+                        fellings=5000;
+                    }
+                    else if(fellings==5000){
+                        location.reload(true);
+                    }
+
+                    else if(fellings==100){
+                        $("#emotionStory").html("Cool! I love dogs! Click a button again to continue.");
+                        fellings=-1;
+                    }
+                    
+                    else if(fellings==-1){
+                        
+                        $("body *").css("display","none");
+                        $("#pictures").css("display","block");
+                        $("#picButt").css("display","block");
+                        $("#pictures").css("background-image","url('dog1.jpg')");
+                        fellings=-2;
+                    }
+                    
+
+                }); 
+                $("#choice_2").click(function(){
+                    
+
+                    if(fellings==0){
+                        $("#emotionStory").html("That's good! You should stay that way! In the meantime, would you like to see some pictures of dogs?");
+                        $("#choice_1").html("Yes! I'd love to see dogs.");
+                        fellings = 100;
+                        $("#choice_2").html("No thanks, I'll just go back to the home page.");
+                    }   
+                    else if(fellings==100){
+                        location.reload(true);
+                    }
+                    else if(fellings==5000){
+                        location.reload(true);
+                    }
+                    else if(fellings==3){
+                        location.reload(true);
+                    }
+                    else if(fellings==1){
+                        $("#emotionStory").html("Cool! I love dogs. Click again to continue");
+                        fellings=-1;
+                    }
+
+                }); 
+            }
+
+
+
+
+
+            function onLoad() {
+                document.addEventListener("deviceready", onDeviceReady, false);
+            }
+            // device APIs are available
+            //
+            function onDeviceReady() {
+                document.addEventListener("pause", onPause, false);
+                document.addEventListener("resume", onResume, false);
+                document.addEventListener("menubutton", onMenuKeyDown, false);
+                // Add similar listeners for other events
+            }
+
+            function onPause() {
+                // Handle the pause event
+
+
+            }
+
+            function onResume() {
+                // Handle the resume event
+            }
+
+            function onMenuKeyDown() {
+                // Handle the menubutton event
+            }
+
+            // Add similar event handlers for other events
+            $("#home-button").click(function(){
+                location.reload(true);   
+                // $("body *").css("display","none");
+                //$("#bottomButts, #bottomButts button, #happiness-bar, #bar-progress").css("display","block");
+
+
+            });
+        </script>
+
+        <script async defer src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBpHqWZ7KbpV7ekDaJxAAL3oc6Qrwkie14
+                                   &callback=initMap"></script>
+    </body>
+</html>        
+
+
+
